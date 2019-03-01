@@ -7,7 +7,7 @@ import sys
 import os
 # Import Adafruit IO MQTT client.
 from Adafruit_IO import MQTTClient
-
+ENV_DICT = {}
 ENV_VARS = [
     "ADAFRUIT_IO_KEY",
     "ADAFRUIT_IO_USERNAME"
