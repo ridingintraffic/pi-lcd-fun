@@ -14,11 +14,10 @@ search-example
 
 export SPLUNK_USERNAME=$USERNAME
 export SPLUNK_PASSWORD=$PASSWORD
-export SPLUNK_HOST=$SPLUNK_HOST
-
-if [ -z "$USERNAME_AD" ] || [ -z "$PASSWORD_AD" ]
+export SPLUNK_HOST=$SPLUNK_HOS
+if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]
 then
-  echo "one of \$USERNAME_AD \$PASSWORD_AD is empty"
+  echo "one of \$USERNAME \$PASSWORD is empty"
 else 
   if [ -f /.dockerenv ]; then
 		# in docker
