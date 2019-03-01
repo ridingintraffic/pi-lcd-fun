@@ -1,3 +1,4 @@
 adafruit-circuitpython-charlcd
 docopt
 splunk-sdk
+Adafruit_IO
