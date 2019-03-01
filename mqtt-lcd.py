@@ -50,7 +50,7 @@ group_name = 'pi-lcd'
 # Feeds within the group
 group_feed_one = 'message1'
 group_feed_two = 'message2'
-
+FEED_ID = 'pi-lcd.message1'
 
 
 # Define callback functions which will be called when certain events happen.
@@ -61,7 +61,8 @@ def connected(client):
     # calls against it easily.
     print('Listening for changes on ', group_name)
     # Subscribe to changes on a group, `group_name`
-    client.subscribe_group(group_name)
+    #client.subscribe_group(group_name)
+    client.subscribe(FEED_ID)
 
 def disconnected(client):
     # Disconnected function will be called when the client disconnects.
@@ -90,4 +91,5 @@ client.connect()
 # Start a message loop that blocks forever waiting for MQTT messages to be
 # received.  Note there are other options for running the event loop like doing
 # so in a background thread--see the mqtt_client.py example to learn more.
-client.loop_background()
+#client.loop_background()
+cleint.loop_blocking()
