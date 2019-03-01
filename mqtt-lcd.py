@@ -74,7 +74,8 @@ def message(client, feed_id, payload):
     # The feed_id parameter identifies the feed, and the payload parameter has
     # the new value.
     print('Feed {0} received new value: {1}'.format(feed_id, payload))
-    lcd.message = payload
+    print_message = payload[:16]+"\n"+payload[16:]
+    lcd.message = print_message
 
 
 # Create an MQTT client instance.
