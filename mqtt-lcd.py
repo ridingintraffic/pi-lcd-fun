@@ -92,4 +92,4 @@ client.connect()
 # received.  Note there are other options for running the event loop like doing
 # so in a background thread--see the mqtt_client.py example to learn more.
 #client.loop_background()
-cleint.loop_blocking()
+client.loop_blocking()
