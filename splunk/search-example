@@ -24,7 +24,7 @@ else
 	    searchlocation="/cmd/search/search"
 	else
 		#normal world
-	    searchlocation="./search/search"
+	    searchlocation="./search"
 	fi
 	$searchlocation "| rest /services/server/info | table *" --output_mode=json | jq
 fi
