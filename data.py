@@ -1,5 +1,5 @@
+#!/usr/bin/env python3
 #sudo pip3 install adafruit-circuitpython-charlcd
-
 
 """Simple test for I2C RGB character LCD shield kit"""
 import time
