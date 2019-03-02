@@ -1,0 +1,37 @@
+[Unit]
+Description=pi-lcd
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+WorkingDirectory=/home/pi/git/ridingintraffic
+
+User=root
+Group=root
+
+PermissionsStartOnly=true
+
+ExecStart=/home/pi/git/ridingintraffic/pi-lcd-fun/io-lcd.py
+# Let systemd restart this service only if it has ended with the clean exit code or signal.
+Restart=always
+# time to sleep before restarting a service
+RestartSec=15
+
+StandardOutput=journal
+StandardError=inherit
+
+# Specifies the maximum file descriptor number that can be opened by this process
+LimitNOFILE=65536
+
+# Disable timeout logic and wait until process is stopped
+TimeoutStopSec=0
+
+# SIGTERM signal is used to stop Minio
+KillSignal=SIGTERM
+
+SendSIGKILL=no
+
+SuccessExitStatus=0
+
+[Install]
+WantedBy=multi-user.target
