@@ -1,3 +1,3 @@
-chmod /home/pi/git/ridingintraffic/pi-lcd-fun
+cd /home/pi/git/ridingintraffic/pi-lcd-fun
 git fetch --all
 
