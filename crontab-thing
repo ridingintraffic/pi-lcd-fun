@@ -1,0 +1,2 @@
+* * * * * /home/pi/git/ridingintraffic/pi-lcd-fun/fetch.sh
+*/15 * * * * /home/pi/git/ridingintraffic/pi-lcd-fun/cycleservice.sh
