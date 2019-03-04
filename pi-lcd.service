@@ -6,8 +6,8 @@ After=network-online.target
 [Service]
 WorkingDirectory=/home/pi/git/ridingintraffic
 
-User=root
-Group=root
+User=pi
+Group=pi
 
 PermissionsStartOnly=true
 EnvironmentFile=/home/pi/git/ridingintraffic/pi-lcd-fun/env.sh
