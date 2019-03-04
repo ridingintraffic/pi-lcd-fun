@@ -11,7 +11,7 @@ Group=root
 
 PermissionsStartOnly=true
 
-ExecStart=/home/pi/git/ridingintraffic/pi-lcd-fun/io-lcd.py
+ExecStart=source /home/pi/git/ridingintraffic/pi-lcd-fun/env.sh; /home/pi/git/ridingintraffic/pi-lcd-fun/io-lcd.py
 # Let systemd restart this service only if it has ended with the clean exit code or signal.
 Restart=always
 # time to sleep before restarting a service
