@@ -33,7 +33,7 @@ lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
 
 lcd.clear()
 
-DATA_MESSAGES = []
+
 
 aio = Client(ENV_DICT['ADAFRUIT_IO_USERNAME'], ENV_DICT['ADAFRUIT_IO_KEY'])
 
@@ -43,6 +43,7 @@ DATA_MESSAGES = {}
 
 
 while True:
+    DATA_MESSAGES = {}
     message1 = aio.receive('pi-lcd.message1')
     message2 = aio.receive('pi-lcd.message2')
     message3 = aio.receive('pi-lcd.message3')
