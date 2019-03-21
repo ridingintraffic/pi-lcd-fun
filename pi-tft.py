@@ -94,11 +94,12 @@ def draw_menu(stdscr):
         stdscr.addstr(start_y + 1, start_x_subtitle, subtitle)
         stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
         stdscr.addstr(start_y + 5, start_x_keystr, keystr)
-        stdscr.addstr(start_y + 6, 0, DATA_MESSAGES['message1'])
-        stdscr.addstr(start_y + 7, 0, DATA_MESSAGES['message2'])
-        stdscr.addstr(start_y + 8, 0, DATA_MESSAGES['message3'])
-        stdscr.addstr(start_y + 9, 0, DATA_MESSAGES['message4'])
-        stdscr.addstr(start_y + 10, 0, DATA_MESSAGES['message5'])
+        a=5
+        for i in DATA_MESSAGES:
+            print(DATA_MESSAGES[i])
+            stdscr.addstr(start_y + a, 0, DATA_MESSAGES[i])
+            a=a+1
+
         stdscr.move(cursor_y, cursor_x)
 
         # Refresh the screen
@@ -121,11 +122,8 @@ def main():
     DATA_MESSAGES.update({message3: message3})
     DATA_MESSAGES.update({message4: message4})
     DATA_MESSAGES.update({message5: message5})
-    print(DATA_MESSAGES['message1'])
-    print(DATA_MESSAGES['message2'])
-    print(DATA_MESSAGES['message3'])
-    print(DATA_MESSAGES['message4'])
-    print(DATA_MESSAGES['message5'])
+    for i in DATA_MESSAGES:
+        print(DATA_MESSAGES[i])
     curses.wrapper(draw_menu)
 
 if __name__ == "__main__":
