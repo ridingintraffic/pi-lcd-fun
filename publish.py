@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 'publish.py'
 =========================================
@@ -9,6 +9,7 @@ Author(s): Brent Rubell, Todd Treece for Adafruit Industries
 # Import standard python modules
 import time
 import sys
+import os
 
 # Import Adafruit IO REST client.
 from Adafruit_IO import Client, Feed
