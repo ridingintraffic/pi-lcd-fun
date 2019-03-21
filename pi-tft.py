@@ -96,8 +96,7 @@ def draw_menu(stdscr):
         stdscr.addstr(start_y + 5, start_x_keystr, keystr)
         a=5
         for i in DATA_MESSAGES:
-            print(DATA_MESSAGES[i])
-            stdscr.addstr(start_y + int(a), 0, str(DATA_MESSAGES[i]))
+            stdscr.addstr(start_y + int(a), 0, str(DATA_MESSAGES[i].value))
             a=a+1
 
         stdscr.move(cursor_y, cursor_x)
