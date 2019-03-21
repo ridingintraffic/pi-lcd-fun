@@ -123,3 +123,6 @@ def main():
     DATA_MESSAGES.update({message4: message4})
     DATA_MESSAGES.update({message5: message5})
     curses.wrapper(draw_menu)
+
+if __name__ == "__main__":
+    main()
