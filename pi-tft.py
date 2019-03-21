@@ -121,6 +121,11 @@ def main():
     DATA_MESSAGES.update({message3: message3})
     DATA_MESSAGES.update({message4: message4})
     DATA_MESSAGES.update({message5: message5})
+    print(DATA_MESSAGES['message1'])
+    print(DATA_MESSAGES['message2'])
+    print(DATA_MESSAGES['message3'])
+    print(DATA_MESSAGES['message4'])
+    print(DATA_MESSAGES['message5'])
     curses.wrapper(draw_menu)
 
 if __name__ == "__main__":
