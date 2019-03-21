@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys,os,time
 import curses
 from Adafruit_IO import Client, Group
@@ -7,7 +8,7 @@ ENV_DICT = {}
 ENV_VARS = [
     "ADAFRUIT_IO_KEY",
     "ADAFRUIT_IO_USERNAME"
-    ]
+]
 
 for var in ENV_VARS:
     if os.getenv(var) is None:
