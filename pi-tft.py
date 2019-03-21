@@ -93,11 +93,11 @@ def draw_menu(stdscr):
         stdscr.addstr(start_y + 1, start_x_subtitle, subtitle)
         stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
         stdscr.addstr(start_y + 5, start_x_keystr, keystr)
-        stdscr.addstr(start_y + 6, 0, message1)
-        stdscr.addstr(start_y + 7, 0, message2)
-        stdscr.addstr(start_y + 8, 0, message3)
-        stdscr.addstr(start_y + 9, 0, message4)
-        stdscr.addstr(start_y + 10, 0, message5)
+        stdscr.addstr(start_y + 6, 0, DATA_MESSAGES{"message1":"value"})
+        stdscr.addstr(start_y + 7, 0, DATA_MESSAGES{"message2":"value"})
+        stdscr.addstr(start_y + 8, 0, DATA_MESSAGES{"message3":"value"})
+        stdscr.addstr(start_y + 9, 0, DATA_MESSAGES{"message4":"value"})
+        stdscr.addstr(start_y + 10, 0, DATA_MESSAGES{"message5":"value"})
         stdscr.move(cursor_y, cursor_x)
 
         # Refresh the screen
