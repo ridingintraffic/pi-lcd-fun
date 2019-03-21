@@ -9,6 +9,7 @@ ENV_VARS = [
     "ADAFRUIT_IO_KEY",
     "ADAFRUIT_IO_USERNAME"
 ]
+DATA_MESSAGES = {}
 
 for var in ENV_VARS:
     if os.getenv(var) is None:
@@ -109,8 +110,6 @@ def draw_menu(stdscr):
 def main():
 
     aio = Client(ENV_DICT['ADAFRUIT_IO_USERNAME'], ENV_DICT['ADAFRUIT_IO_KEY'])
-    DATA_MESSAGES = {}
-    DATA_MESSAGES = {}
     message1 = aio.receive('pi-lcd.message1')
     message2 = aio.receive('pi-lcd.message2')
     message3 = aio.receive('pi-lcd.message3')
