@@ -9,7 +9,7 @@ ENV_VARS = [
     "ADAFRUIT_IO_KEY",
     "ADAFRUIT_IO_USERNAME"
 ]
-DATA_MESSAGES = {}
+
 
 for var in ENV_VARS:
     if os.getenv(var) is None:
@@ -17,6 +17,21 @@ for var in ENV_VARS:
         sys.exit(1)
     ENV_DICT.update({var: os.getenv(var)})
 
+def fetch_data():
+    DATA_MESSAGES = {}
+    aio = Client(ENV_DICT['ADAFRUIT_IO_USERNAME'], ENV_DICT['ADAFRUIT_IO_KEY'])
+    message1 = aio.receive('pi-lcd.message1')
+    message2 = aio.receive('pi-lcd.message2')
+    message3 = aio.receive('pi-lcd.message3')
+    message4 = aio.receive('pi-lcd.message4')
+    message5 = aio.receive('pi-lcd.message5')
+
+    DATA_MESSAGES.update({message1: message1})
+    DATA_MESSAGES.update({message2: message2})
+    DATA_MESSAGES.update({message3: message3})
+    DATA_MESSAGES.update({message4: message4})
+    DATA_MESSAGES.update({message5: message5})
+    return DATA_MESSAGES
 
 def draw_menu(stdscr):
     k = 0
@@ -95,34 +110,21 @@ def draw_menu(stdscr):
         stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
         stdscr.addstr(start_y + 5, start_x_keystr, keystr)
         a=5
-        for i in DATA_MESSAGES:
-            stdscr.addstr(start_y + int(a), 0, str(DATA_MESSAGES[i].value))
+        DATA=fetch_data()
+        for i in DATA:
+            stdscr.addstr(start_y + int(a), 0, str(DATA[i].value))
             a=a+1
 
         stdscr.move(cursor_y, cursor_x)
-
         # Refresh the screen
         stdscr.refresh()
+        time.sleep(10)
 
         # Wait for next input
         k = stdscr.getch()
 
 def main():
 
-    aio = Client(ENV_DICT['ADAFRUIT_IO_USERNAME'], ENV_DICT['ADAFRUIT_IO_KEY'])
-    message1 = aio.receive('pi-lcd.message1')
-    message2 = aio.receive('pi-lcd.message2')
-    message3 = aio.receive('pi-lcd.message3')
-    message4 = aio.receive('pi-lcd.message4')
-    message5 = aio.receive('pi-lcd.message5')
-
-    DATA_MESSAGES.update({message1: message1})
-    DATA_MESSAGES.update({message2: message2})
-    DATA_MESSAGES.update({message3: message3})
-    DATA_MESSAGES.update({message4: message4})
-    DATA_MESSAGES.update({message5: message5})
-    for i in DATA_MESSAGES:
-        print(DATA_MESSAGES[i])
     curses.wrapper(draw_menu)
 
 if __name__ == "__main__":
