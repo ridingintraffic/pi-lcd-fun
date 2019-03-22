@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# search-example: example making use of the search python script 
+#
+# Usage: search  "<splunk spl>" --output_mode=json | jq
+# 
+# 
+# 
+# Arguments:
+# Environment Variables:
+# USERNAME_AD
+# PASSWORD_AD
+# SPLUNK_HOST
+export SPLUNK_USERNAME=$USERNAME
+export SPLUNK_PASSWORD=$PASSWORD
+export SPLUNK_HOST=$SPLUNK_HOST
+if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]
+then
+  echo "one of \$USERNAME \$PASSWORD is empty"
+else 
+  if [ -f /.dockerenv ]; then
+		# in docker
+	    searchlocation="/cmd/search/search"
+	else
+		#normal world
+	    searchlocation="./search"
+	fi
+	$searchlocation "sourcetype=ifttt earliest=-24h latest=now| table *" --output_mode=json | jq
+fi
+
+
+
+
