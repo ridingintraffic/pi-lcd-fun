@@ -17,10 +17,16 @@ for var in ENV_VARS:
         sys.exit(1)
     ENV_DICT.update({var: os.getenv(var)})
 
+def fetch_weather():
+    extendedforecast = requests.get('http://api.wunderground.com/api/d061db772e8c844c/forecast10day/q/IL/Palatine.json')
+    extendedforecast =  json.load(extendedforecast)
+    message1 = "title: %s icon: %s forecast: %s" %(str(extendedforecast['forecast']['txt_forecast']['forecastday'][period]["title"]), str(extendedforecast['forecast']['txt_forecast']['forecastday'][period]["icon"]),str(extendedforecast['forecast']['txt_forecast']['forecastday'][period]["fcttext"]) )
+    WEATHER = {}
+    WEATHER.update({message1: message1})
     
 def fetch_json_data():
     JSON_DATA_MESSAGES = {}
-    qualys = requests.get('https://status.qualys.com/api/v2/status.json')
+    qualys = requests.get('https://status.qualys.com/api/v2/status.json', verify=False)
     qualys_json = qualys.json()
     message1 = "|| Qualys-status || indicator: %s | description %s" %(qualys_json['status']['indicator'], qualys_json['status']['description'] )
     JSON_DATA_MESSAGES.update({message1: message1})
@@ -96,9 +102,11 @@ def draw_menu(stdscr):
         start_x_keystr = int((width // 2) - (len(keystr) // 2) - len(keystr) % 2)
         start_y = int((height // 2) - 2)
 
-        #ignoring the centering
+        # ignoring the centering
         a=1
         start_y=a
+
+
         # Rendering some text
         #whstr = "Width: {}, Height: {}".format(width, height)
         #stdscr.addstr(0, 0, whstr, curses.color_pair(1))
@@ -124,20 +132,26 @@ def draw_menu(stdscr):
         #stdscr.addstr(start_y + 1, start_x_subtitle, subtitle)
         #stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
         #stdscr.addstr(start_y + 5, start_x_keystr, keystr)
+        
 
         if (timecounter == 0) or (timecounter > 60):
-            DATA=fetch_data()
+            #DATA=fetch_data()
             DATA_JSON=fetch_json_data()
+            #WEATHER_DATA=fetch_weather()
             timecounter+=1
         
-        for i in DATA:
-            stdscr.addstr(start_y + int(a), 0, str(DATA[i].value))
-            a=a+1
-        
+        #for i in DATA:
+        #    stdscr.addstr(start_y + int(a), 0, str(DATA[i].value))
+        #    a=a+1
+        stdscr.attron(curses.color_pair(3))
         for i in DATA_JSON:
             stdscr.addstr(start_y + int(a), 0, str(DATA_JSON[i]))
             a=a+1
-  
+        stdscr.attroff(curses.color_pair(3))
+
+        #for i in WEATHER_DATA:
+        #    stdscr.addstr(start_y + int(a), 0, str(WEATHER_DATA[i]))
+        #    a=a+1
 
 
 
