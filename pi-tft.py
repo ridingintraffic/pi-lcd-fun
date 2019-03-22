@@ -17,6 +17,13 @@ for var in ENV_VARS:
         sys.exit(1)
     ENV_DICT.update({var: os.getenv(var)})
 
+def fetch_weather():
+    extendedforecast = requests.get('http://api.wunderground.com/api/d061db772e8c844c/forecast10day/q/IL/Palatine.json')
+    extendedforecast =  json.load(extendedforecast)
+    message1 = "title: %s icon: %s forecast: %s" %(str(extendedforecast['forecast']['txt_forecast']['forecastday'][period]["title"]), str(extendedforecast['forecast']['txt_forecast']['forecastday'][period]["icon"]),str(extendedforecast['forecast']['txt_forecast']['forecastday'][period]["fcttext"]) )
+    WEATHER = {}
+    WEATHER.update({message1: message1})
+    
 def fetch_json_data():
     JSON_DATA_MESSAGES = {}
     qualys = requests.get('https://status.qualys.com/api/v2/status.json')
@@ -125,6 +132,7 @@ def draw_menu(stdscr):
         if (timecounter == 0) or (timecounter > 60):
             DATA=fetch_data()
             DATA_JSON=fetch_json_data()
+            WEATHER_DATA=fetch_weather()
             timecounter+=1
         
         for i in DATA:
@@ -134,6 +142,10 @@ def draw_menu(stdscr):
         for i in DATA_JSON:
             stdscr.addstr(start_y + int(a), 0, str(DATA_JSON[i]))
             a=a+1
+        for i in WEATHER_DATA:
+            stdscr.addstr(start_y + int(a), 0, str(WEATHER_DATA[i]))
+            a=a+1
+
 
 
 
