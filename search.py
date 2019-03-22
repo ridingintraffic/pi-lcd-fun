@@ -79,7 +79,7 @@ def cmdline(argv, flags, **kwargs):
     """A cmdopts wrapper that takes a list of flags and builds the
        corresponding cmdopts rules to match those flags."""
     rules = dict([(flag, {'flags': ["--%s" % flag]}) for flag in flags])
-    return parse(argv, rules, ".splunkrc", **kwargs)
+    return parse(argv, rules, **kwargs)
 
 def main(argv):
     usage = 'usage: %prog [options] "search"'
