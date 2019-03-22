@@ -2,7 +2,7 @@
 import sys,os,time,subprocess
 import curses, requests, json
 from Adafruit_IO import Client, Group
-import splunk.search
+import search
 
 ENV_DICT = {}
 ENV_VARS = [
@@ -27,7 +27,8 @@ def fetch_json_data():
     return JSON_DATA_MESSAGES
 
 def fetch_splunk_data():
-    thing = subprocess.run("/home/pi/git/ridingintraffic/pi-lcd-fun/splunk/ring", shell=True, check=True)
+    thing = search("search sourcetype=ifttt earliest=-24h latest=now| sort 1 -_time| table tag motion")
+    print(thing)
     return thing
 
 def fetch_data():
