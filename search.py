@@ -96,9 +96,9 @@ def main(argv):
 
     verbose = opts.kwargs.get("verbose", 0)
 
-    kwargs_splunk = dslice(opts.kwargs, FLAGS_SPLUNK)
-    kwargs_create = dslice(opts.kwargs, FLAGS_CREATE)
-    kwargs_results = dslice(opts.kwargs, FLAGS_RESULTS)
+    #kwargs_splunk = dslice(opts.kwargs, FLAGS_SPLUNK)
+    #kwargs_create = dslice(opts.kwargs, FLAGS_CREATE)
+    #kwargs_results = dslice(opts.kwargs, FLAGS_RESULTS)
 
     connects = { "owner": "nobody", "host": ENV_DICT['SPLUNK_HOST'], "port": "8089", 'version': "None", "username": ENV_DICT['SPLUNK_USERNAME'], "password": ENV_DICT['SPLUNK_PASSWORD'], "scheme": "https" }
     service = client.connect(**connects)

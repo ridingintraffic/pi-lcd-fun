@@ -27,7 +27,7 @@ def fetch_json_data():
     return JSON_DATA_MESSAGES
 
 def fetch_splunk_data():
-    thing = search.__main__("search sourcetype=ifttt earliest=-24h latest=now| sort 1 -_time| table tag motion")
+    thing = search.main("search sourcetype=ifttt earliest=-24h latest=now| sort 1 -_time| table tag motion")
     print(thing)
     return thing
 
