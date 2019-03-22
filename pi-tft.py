@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys,os,time
-import curses
+import curses, requests, json
 from Adafruit_IO import Client, Group
 
 
@@ -17,20 +17,30 @@ for var in ENV_VARS:
         sys.exit(1)
     ENV_DICT.update({var: os.getenv(var)})
 
+def fetch_json_data():
+    JSON_DATA_MESSAGES = {}
+    qualys = requests.get('https://status.qualys.com/api/v2/status.json')
+    qualys_json = qualys.json()
+    message1 = "|| Qualys-status || indicator: %s | description %s" %(qualys_json['status']['indicator'], qualys_json['status']['description'] )
+    JSON_DATA_MESSAGES.update({message1: message1})
+    return JSON_DATA_MESSAGES
+
 def fetch_data():
     DATA_MESSAGES = {}
     aio = Client(ENV_DICT['ADAFRUIT_IO_USERNAME'], ENV_DICT['ADAFRUIT_IO_KEY'])
+     
     message1 = aio.receive('pi-lcd.message1')
     message2 = aio.receive('pi-lcd.message2')
     message3 = aio.receive('pi-lcd.message3')
     message4 = aio.receive('pi-lcd.message4')
     message5 = aio.receive('pi-lcd.message5')
-
     DATA_MESSAGES.update({message1: message1})
     DATA_MESSAGES.update({message2: message2})
     DATA_MESSAGES.update({message3: message3})
     DATA_MESSAGES.update({message4: message4})
     DATA_MESSAGES.update({message5: message5})
+
+ 
     return DATA_MESSAGES
 
 def draw_menu(stdscr):
@@ -48,6 +58,7 @@ def draw_menu(stdscr):
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
+    timecounter=0
     # Loop where k is the last character pressed
     while (k != ord('q')):
 
@@ -110,15 +121,26 @@ def draw_menu(stdscr):
         stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
         stdscr.addstr(start_y + 5, start_x_keystr, keystr)
         a=5
-        DATA=fetch_data()
+
+        if (timecounter == 0) or (timecounter > 60):
+            DATA=fetch_data()
+            DATA_JSON=fetch_json_data()
+            timecounter+=1
+        
         for i in DATA:
             stdscr.addstr(start_y + int(a), 0, str(DATA[i].value))
             a=a+1
+        
+        for i in DATA_JSON:
+            stdscr.addstr(start_y + int(a), 0, str(DATA_JSON[i]))
+            a=a+1
+
+
 
         stdscr.move(cursor_y, cursor_x)
         # Refresh the screen
         stdscr.refresh()
-        time.sleep(10)
+        time.sleep(1)
 
         # Wait for next input
         k = stdscr.getch()
