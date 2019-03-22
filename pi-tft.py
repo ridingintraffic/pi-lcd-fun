@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys,os,time
+import sys,os,time,subprocess
 import curses, requests, json
 from Adafruit_IO import Client, Group
 
@@ -25,6 +25,9 @@ def fetch_json_data():
     message1 = "|| Qualys-status || indicator: %s | description %s" %(qualys_json['status']['indicator'], qualys_json['status']['description'] )
     JSON_DATA_MESSAGES.update({message1: message1})
     return JSON_DATA_MESSAGES
+
+def fetch_splunk_data():
+    print subprocess.check_output(cd /home/pi/git/ridingintraffic/pi-lcd-fun/splunk && ./ring, shell=True),
 
 def fetch_data():
     DATA_MESSAGES = {}
@@ -137,6 +140,8 @@ def draw_menu(stdscr):
         for i in DATA_JSON:
             stdscr.addstr(start_y + int(a), 0, str(DATA_JSON[i]))
             a=a+1
+
+        stdscr.addstr(start_y + int(a), 0, str(fetch_splunk_data))
   
 
 
