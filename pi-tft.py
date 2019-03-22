@@ -2,7 +2,7 @@
 import sys,os,time,subprocess
 import curses, requests, json
 from Adafruit_IO import Client, Group
-
+import splunk.search
 
 ENV_DICT = {}
 ENV_VARS = [
