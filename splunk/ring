@@ -24,7 +24,7 @@ else
 		#normal world
 	    searchlocation="./search"
 	fi
-	$searchlocation "search sourcetype=ifttt earliest=-24h latest=now| sort _time| top 1| table tag motion " --output_mode=json | jq -r '.results[] | "action:\(.action) motion:\(.motion)"'
+	$searchlocation "search sourcetype=ifttt earliest=-24h latest=now| sort 1 _time| table tag motion " --output_mode=json | jq -r '.results[] | "action:\(.action) motion:\(.motion)"'
 fi
 
 
