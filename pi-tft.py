@@ -142,7 +142,7 @@ def draw_menu(stdscr):
             stdscr.addstr(start_y + int(a), 0, str(DATA_JSON[i]))
             a=a+1
 
-        stdscr.addstr(start_y + int(a), 0, str(fetch_splunk_data))
+        stdscr.addstr(start_y + int(a), 0, str(fetch_splunk_data()))
   
 
 
