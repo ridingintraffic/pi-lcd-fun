@@ -10,10 +10,11 @@
 # USERNAME_AD
 # PASSWORD_AD
 # SPLUNK_HOST
-
+export USERNAME=
+export PASSWORD=
 export SPLUNK_USERNAME=$USERNAME
 export SPLUNK_PASSWORD=$PASSWORD
-export SPLUNK_HOST=$SPLUNK_HOS
+export SPLUNK_HOST=ridingintraffic.mynetgear.com
 if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]
 then
   echo "one of \$USERNAME \$PASSWORD is empty"
