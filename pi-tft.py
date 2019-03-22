@@ -27,7 +27,7 @@ def fetch_json_data():
     return JSON_DATA_MESSAGES
 
 def fetch_splunk_data():
-    print subprocess.check_output("cd /home/pi/git/ridingintraffic/pi-lcd-fun/splunk && ./ring", shell=True)
+    print subprocess.run("cd /home/pi/git/ridingintraffic/pi-lcd-fun/splunk && ./ring", shell=True, check=True)
 
 def fetch_data():
     DATA_MESSAGES = {}
